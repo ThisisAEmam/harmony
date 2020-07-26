@@ -1,0 +1,147 @@
+.Features {
+  width: 100%;
+  padding: 10rem 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.title {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  /* border-bottom: 2px solid var(--secondary); */
+  font-size: 3.5rem;
+}
+
+.container canvas {
+  position: absolute;
+}
+
+.bannerCircle1 {
+  position: absolute;
+  top: -5%;
+  left: 3%;
+  width: 9rem;
+  height: 9rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 100s infinite linear;
+}
+
+.bannerCircle2 {
+  position: absolute;
+  top: 60%;
+  left: 43%;
+  width: 7rem;
+  height: 7rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 80s infinite linear;
+}
+
+.bannerCircle3 {
+  position: absolute;
+  top: 52%;
+  left: 11%;
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 50s infinite linear;
+}
+
+.bannerCircle4 {
+  position: absolute;
+  top: 65%;
+  left: 85%;
+  width: 15rem;
+  height: 15rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 120s infinite linear;
+}
+
+.bannerCircle5 {
+  position: absolute;
+  top: 10%;
+  left: 65%;
+  width: 8rem;
+  height: 8rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 70s infinite linear;
+}
+
+.bannerCircle6 {
+  position: absolute;
+  top: 34%;
+  left: 35%;
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 50s infinite linear;
+}
+
+.bannerCircle7 {
+  position: absolute;
+  top: 91%;
+  left: 5%;
+  width: 7rem;
+  height: 7rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 120s infinite linear;
+}
+
+.bannerCircle8 {
+  position: absolute;
+  top: 87%;
+  left: 73%;
+  width: 8rem;
+  height: 8rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 70s infinite linear;
+}
+
+@keyframes circle1 {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(360deg) scale(1);
+  }
+  100% {
+    transform: rotate(0deg) scale(0.8);
+  }
+}

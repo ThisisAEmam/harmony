@@ -1,0 +1,68 @@
+.Feature {
+  margin: 0 auto;
+  width: 80%;
+  position: relative;
+  margin-top: 5rem;
+  z-index: 20;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+
+.Feature.inverted .container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.textContainer {
+  width: 60%;
+  text-align: justify;
+}
+
+.Feature.inverted .textContainer {
+  width: 60%;
+  margin-left: 0;
+}
+
+.leftSide {
+  border: 2px dashed var(--secondary);
+  border-radius: 30px;
+}
+
+.imageContainer {
+  width: 19.5rem;
+  height: 29.16666667rem;
+}
+
+.imageContainer img {
+  border-radius: 30px;
+}
+
+.textContainer .number {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  font-size: 1.5rem;
+}
+
+.textContainer .title {
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
+}
+
+.textContainer .text {
+  font-size: 1.2rem;
+}

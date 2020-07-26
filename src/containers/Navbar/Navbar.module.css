@@ -1,0 +1,132 @@
+.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  background-color: transparent;
+  z-index: 10000;
+}
+
+.Navbar.scrolled {
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Navbar .leftSide {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.Navbar .leftSide .logo img {
+  height: 2.2rem;
+}
+
+.Navbar .leftSide ul {
+  display: flex;
+  margin-left: 5rem;
+}
+
+.Navbar .leftSide ul li {
+  list-style: none;
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #555;
+}
+
+.Navbar .leftSide ul li:hover {
+  color: var(--secondary);
+}
+
+.Navbar .rightSide {
+  display: flex;
+}
+
+.Navbar .rightSide .login,
+.Navbar .rightSide .signup {
+  display: flex;
+  align-items: center;
+}
+
+.Navbar .rightSide i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.Navbar .rightSide p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.Navbar .rightSide .login {
+  margin-right: 3rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.Navbar .rightSide .login i,
+.Navbar .rightSide .login p {
+  transition: all 0.25s ease;
+}
+
+.Navbar .rightSide .login:hover {
+  opacity: 0.6;
+}
+
+.Navbar.scrolled .login i,
+.Navbar.scrolled .login p {
+  color: var(--text);
+}
+
+.Navbar.scrolled .login:hover {
+  opacity: 1;
+}
+
+.Navbar.scrolled .login:hover i,
+.Navbar.scrolled .login:hover p {
+  color: var(--secondary);
+}
+
+.Navbar .rightSide .signupContainer {
+  width: fit-content;
+  border: 2px dashed;
+  border-color: var(--secondary);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.Navbar .rightSide .signup {
+  padding: 0.55rem 1.5rem;
+  background-color: var(--secondary);
+  border-radius: 5px;
+  font-size: 1rem;
+  transform: translate(-0.3125rem, -0.3125rem);
+  transition: all 0.35s ease;
+}
+
+.Navbar .rightSide .signupContainer:hover {
+  border-color: rgba(230, 52, 25, 0.7);
+  opacity: 0.8;
+}
+
+.Navbar .rightSide .signupContainer:hover .signup {
+  transform: translate(-0.3125rem, -0.4375rem);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}

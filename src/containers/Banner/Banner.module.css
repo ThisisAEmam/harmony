@@ -1,0 +1,186 @@
+.Banner {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.rightSide,
+.leftSide {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.leftSideContainer {
+  width: 80%;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.leftSide p {
+  margin-left: auto;
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.leftSide p span {
+  color: var(--secondary);
+}
+
+.leftSide .buttonContainer {
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: 8rem;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+  border: 2px dashed;
+  border-color: rgba(230, 52, 25, 0.7);
+  border-radius: 5px;
+  transition: all 0.35s ease;
+}
+
+.leftSide .editorBtn {
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: var(--secondary);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transform: translate(-0.3125rem, -0.3125rem);
+  transition: all 0.35s ease;
+}
+
+.leftSide .buttonContainer:hover {
+  border-color: rgba(230, 52, 25, 0.2);
+}
+
+.leftSide .buttonContainer:hover .editorBtn {
+  transform: translate(-0.3125rem, -0.4375rem);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.rightSide .imageContainer {
+  position: absolute;
+  left: 0;
+  z-index: 20;
+  border-radius: 30px;
+  border: 2px dashed var(--secondary);
+}
+
+.rightSide .imageContainer .image {
+  width: 50rem;
+  height: 35rem;
+  border-radius: 30px;
+  transform: translate(0.75rem, 0.75rem);
+}
+
+.rightSide .imageContainer .image img {
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.rightSide .darkBG {
+  margin-left: auto;
+  width: 90%;
+  height: 100%;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background: linear-gradient(221.86deg, #414551 0%, #1c1f26 100%);
+}
+
+.bannerCircle1 {
+  position: absolute;
+  top: 12%;
+  left: 32%;
+  width: 9rem;
+  height: 9rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 100s infinite linear;
+}
+
+.bannerCircle2 {
+  position: absolute;
+  top: 60%;
+  left: 13%;
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 80s infinite linear;
+}
+
+.bannerCircle3 {
+  position: absolute;
+  top: 85%;
+  left: 42%;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  border: 2px dashed var(--secondary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.3;
+  animation: circle1 50s infinite linear;
+}
+
+.bannerCircle4 {
+  position: absolute;
+  top: 65%;
+  left: 85%;
+  width: 15rem;
+  height: 15rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 120s infinite linear;
+}
+
+.bannerCircle5 {
+  position: absolute;
+  top: 10%;
+  left: 65%;
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  border: 2px dashed #888;
+  border-radius: 50%;
+  z-index: 15;
+  opacity: 0.3;
+  animation: circle1 70s infinite linear;
+}
+
+@keyframes circle1 {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(360deg) scale(1);
+  }
+  100% {
+    transform: rotate(0deg) scale(0.8);
+  }
+}
