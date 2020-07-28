@@ -76,14 +76,15 @@
 .rightSide .imageContainer {
   position: absolute;
   left: 0;
+  width: 80%;
   z-index: 20;
   border-radius: 30px;
   border: 2px dashed var(--secondary);
 }
 
 .rightSide .imageContainer .image {
-  width: 50rem;
-  height: 35rem;
+  width: 100%;
+  height: 100%;
   border-radius: 30px;
   transform: translate(0.75rem, 0.75rem);
 }
@@ -147,8 +148,8 @@
 
 .bannerCircle4 {
   position: absolute;
-  top: 65%;
-  left: 85%;
+  top: 60%;
+  left: 80%;
   width: 15rem;
   height: 15rem;
   background-color: transparent;

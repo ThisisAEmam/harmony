@@ -58,7 +58,7 @@ const Banner = (props) => {
           </p>
           <div className={classes.buttonContainer}>
             <Link to="/" className={classes.editorBtn}>
-              Try it now!
+              Join us now!
             </Link>
           </div>
         </div>

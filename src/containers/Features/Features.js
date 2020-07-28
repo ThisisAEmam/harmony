@@ -80,8 +80,8 @@ const Features = (props) => {
         <h1 className={classes.title}>What is in our bag?</h1>
         <canvas ref={canvasRef}></canvas>
         <Feature index={1} firstImage="/images/greyFirst.jpg" secondImage="/images/greyRes.jpg" dimensions={featureDiemnsionHandler} />
-        <Feature index={2} firstImage="/images/deepHarmonFirst.jpg" secondImage="/images/deepHarmonRes.jpg" inverted dimensions={featureDiemnsionHandler} />
-        <Feature index={3} firstImage="/images/personFirst.jpg" secondImage="/images/personRes.jpg" dimensions={featureDiemnsionHandler} />
+        <Feature index={2} firstImage="/images/personFirst.jpg" secondImage="/images/personRes.jpg" inverted dimensions={featureDiemnsionHandler} />
+        <Feature index={3} firstImage="/images/deepHarmonFirst.jpg" secondImage="/images/deepHarmonRes.jpg" dimensions={featureDiemnsionHandler} />
       </div>
     </div>
   );

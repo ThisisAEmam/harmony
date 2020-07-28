@@ -1,9 +1,29 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Navbar.module.css";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
   const navItemsArr = ["Home", "Editor", "Docs"];
   const [isScrolled, setScrolled] = useState(false);
+  const { currentPage } = useSelector((state) => state);
+  const [activePage, setActivePage] = useState(null);
+
+  useEffect(() => {
+    switch (currentPage) {
+      case "Home":
+        setActivePage(0);
+        break;
+      case "Editor":
+        setActivePage(1);
+        break;
+      case "Docs":
+        setActivePage(2);
+        break;
+      default:
+        setActivePage(null);
+        break;
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -21,7 +41,9 @@ const Navbar = (props) => {
           </div>
           <ul>
             {navItemsArr.map((navItem, index) => (
-              <li key={index}>{navItem}</li>
+              <li key={index} className={activePage === index ? classes.active : null}>
+                {navItem}
+              </li>
             ))}
           </ul>
         </div>
@@ -33,7 +55,7 @@ const Navbar = (props) => {
           <div className={classes.signupContainer}>
             <div className={classes.signup}>
               <i className="fa fa-user-plus"></i>
-              <p>Signup</p>
+              <p>Join now</p>
             </div>
           </div>
         </div>
