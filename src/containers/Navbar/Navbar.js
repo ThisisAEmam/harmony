@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Navbar.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setModal } from "../../features/modalSlice";
 
 const Navbar = (props) => {
   const navItemsArr = ["Home", "Editor", "Docs"];
   const [isScrolled, setScrolled] = useState(false);
-  const { currentPage } = useSelector((state) => state);
   const [activePage, setActivePage] = useState(null);
+  const { currentPage } = useSelector((state) => state);
+  const modalDispatch = useDispatch(setModal);
 
   useEffect(() => {
     switch (currentPage) {
@@ -32,6 +34,10 @@ const Navbar = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window]);
 
+  const loginSignupClickHandler = (type) => {
+    modalDispatch(setModal({ shown: true, type: type }));
+  };
+
   return (
     <div className={[classes.Navbar, isScrolled ? classes.scrolled : null].join(" ")}>
       <div className={classes.container}>
@@ -48,14 +54,14 @@ const Navbar = (props) => {
           </ul>
         </div>
         <div className={classes.rightSide}>
-          <div className={classes.login}>
+          <div className={classes.login} onClick={() => loginSignupClickHandler("login")}>
             <i className="fa fa-unlock-alt"></i>
             <p>Login</p>
           </div>
           <div className={classes.signupContainer}>
-            <div className={classes.signup}>
+            <div className={classes.signup} onClick={() => loginSignupClickHandler("signup")}>
               <i className="fa fa-user-plus"></i>
-              <p>Join now</p>
+              <p>Join us</p>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ import Features from "../../containers/Features/Features";
 import Footer from "../../containers/Footer/Footer";
 import { useDispatch } from "react-redux";
 import { setCurrentPage } from "../../features/currentPageSlice";
+import Modal from "../../components/Modal/Modal";
 
 const Homepage = (props) => {
   const dispatch = useDispatch(setCurrentPage);
@@ -16,6 +17,7 @@ const Homepage = (props) => {
 
   return (
     <div className={classes.Homepage}>
+      <Modal />
       <Navbar />
       <Banner />
       <Features />

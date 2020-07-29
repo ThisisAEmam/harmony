@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import classes from "./Banner.module.css";
-import { Link } from "react-router-dom";
 import { useSpring, useChain, animated, config } from "react-spring";
 
 const Banner = (props) => {
@@ -57,9 +56,7 @@ const Banner = (props) => {
             Because your images need some <span>magic.</span>
           </p>
           <div className={classes.buttonContainer}>
-            <Link to="/" className={classes.editorBtn}>
-              Join us now!
-            </Link>
+            <div className={classes.editorBtn}>Try it now!</div>
           </div>
         </div>
       </div>
