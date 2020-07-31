@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
+import Editorpage from "./pages/Editorpage/Editorpage";
+import Profilepage from "./pages/Profilepage/Profilepage";
+import Docspage from "./pages/Docspage/Docspage";
 import { setScreen } from "./features/screenSlice";
 import { useDispatch } from "react-redux";
 
@@ -23,6 +26,9 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={Homepage} />
+          <Route path="/editor" exact component={Editorpage} />
+          <Route path="/profile" exact component={Profilepage} />
+          <Route path="/docs" exact component={Docspage} />
         </Switch>
       </Router>
     </div>

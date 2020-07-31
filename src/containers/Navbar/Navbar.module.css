@@ -139,3 +139,92 @@
   transform: translate(-0.3125rem, -0.4375rem);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
+
+.Navbar.loggedIn .rightSide {
+  align-items: center;
+}
+
+.Navbar.loggedIn .rightSide .greeting {
+  /* font-size: 1rem; */
+  color: var(--secondary);
+  margin-right: 3rem;
+}
+
+.Navbar.loggedIn .rightSide .greeting span {
+  color: #fff;
+}
+
+.Navbar.loggedIn.scrolled .rightSide .greeting span {
+  color: var(--text);
+}
+
+.Navbar.loggedIn .rightSide .profile {
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-right: 3rem;
+}
+
+.Navbar.loggedIn .rightSide .profile p {
+  transition: all 0.25s ease;
+}
+
+.Navbar.loggedIn .rightSide .profile.notHomeProfile p {
+  color: var(--text);
+}
+
+.Navbar.loggedIn .rightSide .profile.activeProfile p {
+  color: var(--secondary);
+}
+
+.Navbar.loggedIn .rightSide .profile:hover {
+  opacity: 0.7;
+}
+
+.Navbar.loggedIn.scrolled .profile p {
+  color: var(--text);
+}
+
+.Navbar.loggedIn.scrolled .profile:hover {
+  opacity: 1;
+}
+
+.Navbar.loggedIn.scrolled .profile:hover p {
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.Navbar.loggedIn .rightSide .logout {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.Navbar.loggedIn .rightSide .logout i,
+.Navbar.loggedIn .rightSide .logout p {
+  transition: all 0.25s ease;
+}
+
+.Navbar.loggedIn .rightSide .logout.notHomeLogout i,
+.Navbar.loggedIn .rightSide .logout.notHomeLogout p {
+  color: var(--text);
+}
+
+.Navbar.loggedIn.scrolled .logout i,
+.Navbar.loggedIn.scrolled .logout p {
+  color: var(--text);
+}
+
+.Navbar.loggedIn.scrolled .logout:hover {
+  opacity: 1;
+}
+
+.Navbar.loggedIn .logout:hover i,
+.Navbar.loggedIn .logout:hover p {
+  color: var(--secondary);
+}
+
+.Navbar.loggedIn .logout.notHomeLogout:hover i,
+.Navbar.loggedIn .logout.notHomeLogout:hover p {
+  color: var(--secondary);
+}

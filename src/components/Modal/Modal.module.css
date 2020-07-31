@@ -11,7 +11,7 @@
 
 .Modal {
   position: relative;
-  width: 35%;
+  width: 40%;
   background-color: #fff;
   border: 1px solid var(--secondary);
   border-radius: 15px;
@@ -72,13 +72,44 @@
   opacity: 0;
 }
 
-.buttons {
-  width: 100%;
+.field.showText .errorText {
+  opacity: 1;
+}
+
+.field.showText input {
+  border-color: var(--primary);
+}
+
+.bottom {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
   border-top: 1px solid var(--secondary);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+}
+
+.switch .signupLink {
+  margin-left: 0.5rem;
+  color: var(--secondary);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  transition: all 0.25s ease;
+}
+
+.switch .signupLink:hover {
+  color: var(--secondary);
+  border-bottom-color: var(--secondary);
+  opacity: 0.8;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
 }
 
 .buttonContainer {
