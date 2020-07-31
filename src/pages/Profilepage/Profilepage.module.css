@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.sidebarPanel {
+  list-style: none;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.sidebarPanel:last-child {
+  border-bottom: none;
+}
+
+.sidebarPanel.activeSidebarPanel {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+.mainArea {
+  width: 70%;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
