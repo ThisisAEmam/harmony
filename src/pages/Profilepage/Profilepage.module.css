@@ -28,6 +28,73 @@
 .mainArea {
   width: 70%;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.mainAreaContainer {
+  width: 60%;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.mainAreaRow {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mainAreaRow:last-child {
+  border-bottom: none;
+}
+
+.mainAreaRow label {
+  width: 10%;
+}
+
+.mainAreaRow input {
+  padding: 0 0.5rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 70%;
+  height: 1.8rem;
+  /* margin: 0 2.5rem; */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.mainAreaRow .changeBtn {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  width: 10%;
+  text-align: center;
+}
+
+.mainAreaRow .changeBtn:hover {
+  border-color: var(--secondary);
+}
+
+.mainAreaRow .icons {
+  display: flex;
+  width: 10%;
+  justify-content: space-evenly;
+}
+
+.mainAreaRow .icons i:first-child {
+  color: green;
+  cursor: pointer;
+}
+
+.mainAreaRow .icons i:last-child {
+  color: red;
+  cursor: pointer;
 }
 
 .footer {
