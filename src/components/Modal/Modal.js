@@ -4,14 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSpring, useChain, animated, config } from "react-spring";
 import { setModal } from "../../features/modalSlice";
 import { setLoggedIn } from "../../features/loggedInSlice";
-import { setUserData } from "../../features/userDataSlice";
 import axios from "axios";
 
 const Modal = (props) => {
   const { modal } = useSelector((state) => state);
   const modalDispatch = useDispatch(setModal);
   const loginDispatch = useDispatch(setLoggedIn);
-  const userDataDispatch = useDispatch(setUserData);
   const [show, setShow] = useState(false);
   const [loginClicked, setLoginClicked] = useState(false);
   const [name, setName] = useState("");
@@ -53,6 +51,7 @@ const Modal = (props) => {
       document.body.style.overflow = "visible";
     }
     setLoginClicked(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modal]);
 
   useEffect(() => {
@@ -173,10 +172,8 @@ const Modal = (props) => {
         axios
           .post("/users/login", sentData)
           .then((res) => {
-            const userdata = res.data.user;
-            userDataDispatch(
-              setUserData({ name: userdata.name, email: userdata.email, age: userdata.age, createdAt: userdata.createdAt, token: res.data.token })
-            );
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("isLoggedIn", true);
             loginDispatch(setLoggedIn(true));
             modalDispatch(setModal({ shown: false, type: "" }));
           })
@@ -194,10 +191,8 @@ const Modal = (props) => {
         axios
           .post("/users", sentData)
           .then((res) => {
-            const userdata = res.data.user;
-            userDataDispatch(
-              setUserData({ name: userdata.name, email: userdata.email, age: userdata.age, createdAt: userdata.createdAt, token: res.data.token })
-            );
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("isLoggedIn", true);
             loginDispatch(setLoggedIn(true));
             modalDispatch(setModal({ shown: false, type: "" }));
           })

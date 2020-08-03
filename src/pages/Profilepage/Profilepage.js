@@ -3,7 +3,6 @@ import classes from "./Profilepage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCurrentPage } from "../../features/currentPageSlice";
-import { setUserData } from "../../features/userDataSlice";
 import Navbar from "../../containers/Navbar/Navbar";
 import Footer from "../../containers/Footer/Footer";
 import Layout from "../../hoc/Layout/Layout";
@@ -15,10 +14,8 @@ const Profilepage = (props) => {
   const sidebarArr = ["General info", "Previous workspaces", "Change my password", "Delete my account"];
   const [activePanel, setActivePanel] = useState(0);
   const dispatch = useDispatch(setCurrentPage);
-  const userDataDispatch = useDispatch(setUserData);
   useEffect(() => {
     dispatch(setCurrentPage("Profile"));
-    // userDataDispatch(setUserData({ name: "AbdelRahman", email: "abdoemamofficial@gmail.com", token: "a516d8aw8d1asda8w" }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -26,7 +23,6 @@ const Profilepage = (props) => {
   useEffect(() => {
     if (!isLoggedIn) {
       history.push("/");
-      userDataDispatch(setUserData({ name: "", email: "", token: "" }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
@@ -45,10 +41,10 @@ const Profilepage = (props) => {
       content = <ProfilePrevWorkspaces />;
       break;
     case 2:
-      content = <ProfileGeneralInfo />;
+      content = <ProfilePrevWorkspaces />;
       break;
     case 3:
-      content = <ProfileGeneralInfo />;
+      content = <ProfilePrevWorkspaces />;
       break;
     default:
       break;

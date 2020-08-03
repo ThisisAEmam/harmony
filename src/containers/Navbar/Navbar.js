@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setModal } from "../../features/modalSlice";
 import { setLoggedIn } from "../../features/loggedInSlice";
 import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = (props) => {
   const navItemsArr = ["Home", "Editor", "Docs"];
   const [isScrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState(null);
-  const { currentPage, isLoggedIn, userData } = useSelector((state) => state);
+  const { currentPage, isLoggedIn } = useSelector((state) => state);
   const modalDispatch = useDispatch(setModal);
   const loginDispatch = useDispatch(setLoggedIn);
 
@@ -42,7 +43,22 @@ const Navbar = (props) => {
 
   const loginSignupClickHandler = (type) => {
     if (type === "logout") {
+      let token = localStorage.getItem("token");
+      axios
+        .post(
+          "/users/logout",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => res)
+        .catch((err) => console.log(err));
       loginDispatch(setLoggedIn(false));
+      localStorage.setItem("isLoggedIn", false);
+      localStorage.removeItem("token");
       return;
     }
     modalDispatch(setModal({ shown: true, type: type }));

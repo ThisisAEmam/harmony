@@ -1,0 +1,19 @@
+routes : 
+/users  POST (for sign up)
+/users/logout POST
+/users/login POST 
+/users/logoutall POST
+/users/me GET
+/users/me PATCH
+/users/me DELETE
+
+################# ADMIN ###################
+
+/users GET 
+to get all website users
+
+/users DELETE 
+to delete all users except the one you are logged in with
+
+./users/*id*
+to delete the user with id

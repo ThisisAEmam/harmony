@@ -13,4 +13,5 @@ export default configureStore({
     isLoggedIn: LoggedInReducer,
     userData: UserDataReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
