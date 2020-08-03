@@ -26,6 +26,7 @@ const Modal = (props) => {
   const [wrongPassword, setWrongPassword] = useState(false);
   const [wrongConfirmPassword, setWrongConfirmPassword] = useState(false);
   const [submit, setSubmit] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const wrapperRef = useRef();
   const loginRef = useRef();
@@ -164,14 +165,24 @@ const Modal = (props) => {
     setSubmit(false);
     if (modal.type === "login") {
       if (!emptyEmail && !emptyPassword && !wrongEmail && !wrongPassword) {
+        setLoginError(false);
         const sentData = {
-          name,
           email,
           password,
         };
-        loginDispatch(setLoggedIn(true));
-        userDataDispatch(setUserData({ name: "Test", email: "Test", token: "awd1616ada968s4d" }));
-        modalDispatch(setModal({ shown: false, type: "" }));
+        axios
+          .post("/users/login", sentData)
+          .then((res) => {
+            const userdata = res.data.user;
+            userDataDispatch(
+              setUserData({ name: userdata.name, email: userdata.email, age: userdata.age, createdAt: userdata.createdAt, token: res.data.token })
+            );
+            loginDispatch(setLoggedIn(true));
+            modalDispatch(setModal({ shown: false, type: "" }));
+          })
+          .catch((error) => {
+            setLoginError(true);
+          });
       }
     } else if (modal.type === "signup") {
       if (!emptyEmail && !emptyPassword && !emptyConfirmPassword && !emptyName && !wrongEmail && !wrongPassword && !wrongConfirmPassword) {
@@ -180,15 +191,17 @@ const Modal = (props) => {
           email,
           password,
         };
-        // axios
-        //   .post("/users", sentData)
-        //   .then((res) => {
-
-        //   })
-        //   .catch((error) => console.log(error));
-        userDataDispatch(setUserData({ name: "Test", email: sentData.email, token: "awd1616ada968s4d" }));
-        loginDispatch(setLoggedIn(true));
-        modalDispatch(setModal({ shown: false, type: "" }));
+        axios
+          .post("/users", sentData)
+          .then((res) => {
+            const userdata = res.data.user;
+            userDataDispatch(
+              setUserData({ name: userdata.name, email: userdata.email, age: userdata.age, createdAt: userdata.createdAt, token: res.data.token })
+            );
+            loginDispatch(setLoggedIn(true));
+            modalDispatch(setModal({ shown: false, type: "" }));
+          })
+          .catch((error) => console.log(error));
       }
     }
   };
@@ -234,7 +247,7 @@ const Modal = (props) => {
             />
             <p className={classes.errorText}>{emptyEmail ? "No email is provided." : "Please enter a valid email."}</p>
           </div>
-          <div className={[classes.field, emptyPassword || wrongPassword ? classes.showText : null].join(" ")}>
+          <div className={[classes.field, emptyPassword || wrongPassword || loginError ? classes.showText : null].join(" ")}>
             <label htmlFor="password">Password:</label>
             <input
               type="password"
@@ -245,7 +258,9 @@ const Modal = (props) => {
               onFocus={() => inputFocusHandler("password")}
             />
             <p className={classes.errorText}>
-              {emptyPassword
+              {loginError
+                ? "Wrong email or password."
+                : emptyPassword
                 ? "No password is provided."
                 : modal.type === "signup"
                 ? wrongPassword
