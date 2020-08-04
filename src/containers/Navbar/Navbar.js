@@ -82,12 +82,16 @@ const Navbar = (props) => {
     history.push("/profile");
   };
 
+  const logoHandler = () => {
+    history.push("/");
+  };
+
   return (
     <div className={[classes.Navbar, isScrolled ? classes.scrolled : null, isLoggedIn ? classes.loggedIn : null].join(" ")}>
       <div className={classes.container}>
         <div className={classes.leftSide}>
           <div className={classes.logo}>
-            <img src="/images/logo.png" alt="Logo" />
+            <img src="/images/logo.png" alt="Logo" onClick={logoHandler} />
           </div>
           <ul>
             {navItemsArr.map((navItem, index) => (

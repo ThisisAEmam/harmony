@@ -8,6 +8,8 @@ import Footer from "../../containers/Footer/Footer";
 import Layout from "../../hoc/Layout/Layout";
 import ProfileGeneralInfo from "../../components/ProfileGeneralInfo/ProfileGeneralInfo";
 import ProfilePrevWorkspaces from "../../components/ProfilePrevWorkspaces/ProfilePrevWorkspaces";
+import ProfileChangePassword from "../../components/ProfileChangePassword/ProfileChangePassword";
+import ProfileDeleteAccount from "../../components/ProfileDeleteAccount/ProfileDeleteAccount";
 
 const Profilepage = (props) => {
   const { isLoggedIn } = useSelector((state) => state);
@@ -41,10 +43,10 @@ const Profilepage = (props) => {
       content = <ProfilePrevWorkspaces />;
       break;
     case 2:
-      content = <ProfilePrevWorkspaces />;
+      content = <ProfileChangePassword />;
       break;
     case 3:
-      content = <ProfilePrevWorkspaces />;
+      content = <ProfileDeleteAccount />;
       break;
     default:
       break;

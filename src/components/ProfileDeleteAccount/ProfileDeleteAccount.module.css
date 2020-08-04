@@ -1,0 +1,127 @@
+.mainAreaContainer {
+  width: 60%;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  height: fit-content;
+  padding: 1rem 2rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.title i {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+  color: var(--secondary);
+}
+
+.title p {
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.body {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.body p {
+  font-size: 1.2rem;
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+.body p span {
+  font-weight: 600;
+}
+
+.btn {
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.modal {
+  position: relative;
+  width: 40%;
+  background-color: #fff;
+  border: 1px solid var(--secondary);
+  border-radius: 15px;
+  z-index: 2100;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  color: var(--secondary);
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modalBody {
+  margin: 2rem 0;
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--secondary);
+  padding: 0.75rem 0;
+  width: 5rem;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.buttons p:hover {
+  opacity: 0.8;
+}
+
+.buttons .cancel {
+  margin-right: 1rem;
+  background-color: #888;
+}

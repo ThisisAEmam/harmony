@@ -3,7 +3,6 @@ import ScreenReducer from "../features/screenSlice";
 import CurrentPageReducer from "../features/currentPageSlice";
 import ModalReducer from "../features/modalSlice";
 import LoggedInReducer from "../features/loggedInSlice";
-import UserDataReducer from "../features/userDataSlice";
 
 export default configureStore({
   reducer: {
@@ -11,7 +10,6 @@ export default configureStore({
     currentPage: CurrentPageReducer,
     modal: ModalReducer,
     isLoggedIn: LoggedInReducer,
-    userData: UserDataReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

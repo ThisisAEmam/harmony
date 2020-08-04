@@ -30,6 +30,7 @@
 
 .Navbar .leftSide .logo img {
   width: 11rem;
+  cursor: pointer;
 }
 
 .Navbar .leftSide ul {
