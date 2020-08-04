@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
-import Editorpage from "./pages/Editorpage/Editorpage";
+import Editorpage from "./pages/Editorpage/EditorPage";
 import Profilepage from "./pages/Profilepage/Profilepage";
 import Docspage from "./pages/Docspage/Docspage";
 import { setScreen } from "./features/screenSlice";
