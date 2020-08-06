@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
+import { useHistory } from "react-router-dom";
 import classes from "./Banner.module.css";
 import { useSpring, useChain, animated, config } from "react-spring";
 
 const Banner = (props) => {
+  const history = useHistory();
+
   const darkBGRef = useRef();
   const darkBG = useSpring({
     ref: darkBGRef,
@@ -41,6 +44,10 @@ const Banner = (props) => {
 
   useChain([darkBGRef, fadeInRef, circlesFadeInRef]);
 
+  const tryItHandler = () => {
+    history.push("/editor");
+  };
+
   return (
     <div className={classes.Banner} ref={bannerRef}>
       <animated.div style={circlesFadeIn} className={classes.bannerCircles}>
@@ -56,7 +63,9 @@ const Banner = (props) => {
             Because your images need some <span>magic.</span>
           </p>
           <div className={classes.buttonContainer}>
-            <div className={classes.editorBtn}>Try it now!</div>
+            <div className={classes.editorBtn} onClick={tryItHandler}>
+              Try it now!
+            </div>
           </div>
         </div>
       </div>
