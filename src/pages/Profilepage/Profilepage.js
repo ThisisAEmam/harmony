@@ -13,7 +13,7 @@ import ProfileDeleteAccount from "../../components/ProfileDeleteAccount/ProfileD
 const Profilepage = (props) => {
   const { isLoggedIn } = useSelector((state) => state);
   const sidebarArr = ["General info", "Change my password", "Delete my account"];
-  const [activePanel, setActivePanel] = useState(1);
+  const [activePanel, setActivePanel] = useState(0);
   const dispatch = useDispatch(setCurrentPage);
   useEffect(() => {
     dispatch(setCurrentPage("Profile"));
