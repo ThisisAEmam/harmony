@@ -7,7 +7,6 @@ import Navbar from "../../containers/Navbar/Navbar";
 import Footer from "../../containers/Footer/Footer";
 import Layout from "../../hoc/Layout/Layout";
 import ProfileGeneralInfo from "../../components/ProfileGeneralInfo/ProfileGeneralInfo";
-import ProfilePrevWorkspaces from "../../components/ProfilePrevWorkspaces/ProfilePrevWorkspaces";
 import ProfileChangePassword from "../../components/ProfileChangePassword/ProfileChangePassword";
 import ProfileDeleteAccount from "../../components/ProfileDeleteAccount/ProfileDeleteAccount";
 
@@ -39,9 +38,6 @@ const Profilepage = (props) => {
     case 0:
       content = <ProfileGeneralInfo />;
       break;
-    // case 1:
-    //   content = <ProfilePrevWorkspaces />;
-    //   break;
     case 1:
       content = <ProfileChangePassword />;
       break;
