@@ -13,7 +13,7 @@ import ProfileDeleteAccount from "../../components/ProfileDeleteAccount/ProfileD
 
 const Profilepage = (props) => {
   const { isLoggedIn } = useSelector((state) => state);
-  const sidebarArr = ["General info", "Previous workspaces", "Change my password", "Delete my account"];
+  const sidebarArr = ["General info", "Change my password", "Delete my account"];
   const [activePanel, setActivePanel] = useState(0);
   const dispatch = useDispatch(setCurrentPage);
   useEffect(() => {
@@ -39,13 +39,13 @@ const Profilepage = (props) => {
     case 0:
       content = <ProfileGeneralInfo />;
       break;
+    // case 1:
+    //   content = <ProfilePrevWorkspaces />;
+    //   break;
     case 1:
-      content = <ProfilePrevWorkspaces />;
-      break;
-    case 2:
       content = <ProfileChangePassword />;
       break;
-    case 3:
+    case 2:
       content = <ProfileDeleteAccount />;
       break;
     default:

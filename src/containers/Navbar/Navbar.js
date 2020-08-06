@@ -7,7 +7,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = (props) => {
-  const navItemsArr = ["Home", "Editor", "Docs"];
+  const navItemsArr = ["Home", "Editor"];
   const [isScrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState(null);
   const { currentPage, isLoggedIn } = useSelector((state) => state);
@@ -22,9 +22,9 @@ const Navbar = (props) => {
       case "Editor":
         setActivePage(1);
         break;
-      case "Docs":
-        setActivePage(2);
-        break;
+      // case "Docs":
+      //   setActivePage(2);
+      //   break;
       case "Profile":
         setActivePage(3);
         break;
@@ -103,9 +103,6 @@ const Navbar = (props) => {
         </div>
         {isLoggedIn ? (
           <div className={classes.rightSide}>
-            {/* <p className={classes.greeting}>
-              Welcome back, <span>{userData.name}</span>
-            </p> */}
             <div
               className={[classes.profile, activePage !== 0 ? classes.notHomeProfile : null, activePage === 3 ? classes.activeProfile : null].join(" ")}
               onClick={profileClickHandler}>

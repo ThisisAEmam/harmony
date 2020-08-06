@@ -7,6 +7,8 @@ import Profilepage from "./pages/Profilepage/Profilepage";
 import Docspage from "./pages/Docspage/Docspage";
 import { setScreen } from "./features/screenSlice";
 import { useDispatch } from "react-redux";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 
 function App() {
   const screenDispatch = useDispatch(setScreen);
@@ -29,6 +31,8 @@ function App() {
           <Route path="/editor" exact component={Editorpage} />
           <Route path="/profile" exact component={Profilepage} />
           <Route path="/docs" exact component={Docspage} />
+          <Route path="/forget" exact component={ForgetPassword} />
+          <Route path="/reset/:id/:token" exact component={ResetPassword} />
         </Switch>
       </Router>
     </div>

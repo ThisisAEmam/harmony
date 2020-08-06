@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import classes from "./Modal.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useSpring, useChain, animated, config } from "react-spring";
@@ -25,6 +26,8 @@ const Modal = (props) => {
   const [wrongConfirmPassword, setWrongConfirmPassword] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [loginError, setLoginError] = useState(false);
+
+  const history = useHistory();
 
   const wrapperRef = useRef();
   const loginRef = useRef();
@@ -201,14 +204,14 @@ const Modal = (props) => {
     }
   };
 
-  const switchHandler = () => {
+  const switchHandler = (type) => {
     const temp = { ...modal };
-    if (modal.type === "login") {
-      temp.type = "signup";
-    } else {
-      temp.type = "login";
-    }
+    temp.type = type;
     modalDispatch(setModal(temp));
+  };
+
+  const forgotHandler = () => {
+    history.push("/forget");
   };
 
   return (
@@ -268,6 +271,11 @@ const Modal = (props) => {
                 : ""}
             </p>
           </div>
+          {modal.type === "login" ? (
+            <p className={classes.forgotPassword} onClick={forgotHandler}>
+              Forgot your password?
+            </p>
+          ) : null}
           {modal.type === "signup" ? (
             <div className={[classes.field, emptyConfirmPassword || wrongConfirmPassword ? classes.showText : null].join(" ")}>
               <label htmlFor="confirmPassword">Confirm Password:</label>
@@ -287,14 +295,14 @@ const Modal = (props) => {
           {modal.type === "login" ? (
             <div className={classes.switch}>
               <p>Don't have an account? No problem.</p>
-              <p className={classes.signupLink} onClick={switchHandler}>
+              <p className={classes.signupLink} onClick={() => switchHandler("signup")}>
                 Sign up now!
               </p>
             </div>
           ) : (
             <div className={classes.switch}>
               <p>Already have an account?</p>
-              <p className={classes.signupLink} onClick={switchHandler}>
+              <p className={classes.signupLink} onClick={() => switchHandler("login")}>
                 Login now!
               </p>
             </div>
