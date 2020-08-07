@@ -111,6 +111,18 @@ class EditorPage extends Component {
     });
   }
 
+  colorizePost= ()=>{
+    const imageEditorInst = this.imageEditor.current.imageEditorInst;
+    const data = imageEditorInst.toDataURL(); 
+    this.setState({loading:true},()=>{
+      Axios.post('https://colorer.azurewebsites.net', {input:data}).then(response=>{
+        imageEditorInst.loadImageFromFile(this.dataURLtoFile(response.data.res, 'lena')).then(()=>{
+          this.setState({loading:false});
+        });
+      });
+    });
+  }
+
   render(){
     return (
       <div>
@@ -121,6 +133,7 @@ class EditorPage extends Component {
           <div className="center">
             <Button className='button' onClick={this.saveImageToDisk}>Save Image to Disk</Button>
             <Button style={{marginLeft:'50px'}} className='button' onClick={this.segmentPost}>Segment</Button>
+            <Button style={{marginLeft:'50px'}} className='button' onClick={this.colorizePost}>Colorization</Button>
             <Button style={{marginLeft:'50px'}} className='button' onClick={this.magicLoad}>Harmonize</Button>
           </div>
           :<div></div>
