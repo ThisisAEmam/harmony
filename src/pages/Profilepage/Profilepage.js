@@ -7,13 +7,12 @@ import Navbar from "../../containers/Navbar/Navbar";
 import Footer from "../../containers/Footer/Footer";
 import Layout from "../../hoc/Layout/Layout";
 import ProfileGeneralInfo from "../../components/ProfileGeneralInfo/ProfileGeneralInfo";
-import ProfilePrevWorkspaces from "../../components/ProfilePrevWorkspaces/ProfilePrevWorkspaces";
 import ProfileChangePassword from "../../components/ProfileChangePassword/ProfileChangePassword";
 import ProfileDeleteAccount from "../../components/ProfileDeleteAccount/ProfileDeleteAccount";
 
 const Profilepage = (props) => {
   const { isLoggedIn } = useSelector((state) => state);
-  const sidebarArr = ["General info", "Previous workspaces", "Change my password", "Delete my account"];
+  const sidebarArr = ["General info", "Change my password", "Delete my account"];
   const [activePanel, setActivePanel] = useState(0);
   const dispatch = useDispatch(setCurrentPage);
   useEffect(() => {
@@ -40,12 +39,9 @@ const Profilepage = (props) => {
       content = <ProfileGeneralInfo />;
       break;
     case 1:
-      content = <ProfilePrevWorkspaces />;
-      break;
-    case 2:
       content = <ProfileChangePassword />;
       break;
-    case 3:
+    case 2:
       content = <ProfileDeleteAccount />;
       break;
     default:

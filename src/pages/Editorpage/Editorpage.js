@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, Component} from "react";
 // import classes from "./Editorpage.module.css";
 // import { useDispatch } from "react-redux";
@@ -41,6 +42,36 @@ const myTheme = {
   'loadButton.backgroundColor': '#eb5f4b',
   'loadButton.color': '#414551',
   'loadButton.fontSize': '20px',
+=======
+import React, { useEffect, useState } from "react";
+import classes from "./Editorpage.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../../features/currentPageSlice";
+import EditorModal from "../../components/EditorModal/EditorModal";
+import Editor from "../../containers/Editor/Editor";
+
+const Editorpage = (props) => {
+  const { isLoggedIn } = useSelector((state) => state);
+  const dispatch = useDispatch(setCurrentPage);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(setCurrentPage("Editor"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // history.push("/");
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
+
+  return <div className={classes.Editorpage}>{showModal ? <EditorModal /> : <Editor />}</div>;
+>>>>>>> 76acbd0774a7b7f5badd971c6e74aa6d63fae7a0
 };
 
 class EditorPage extends Component {
