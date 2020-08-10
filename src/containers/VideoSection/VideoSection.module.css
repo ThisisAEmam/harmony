@@ -27,8 +27,8 @@
   position: relative;
   width: 50rem;
   height: calc(50rem * 9 / 16);
-  border: 2px dashed var(--secondary);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+  border: 2px dashed rgb(134, 167, 201);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
 
 .video {

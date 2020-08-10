@@ -9,6 +9,7 @@ import { setCurrentPage } from "../../features/currentPageSlice";
 import Modal from "../../components/Modal/Modal";
 import { useHistory } from "react-router-dom";
 import VideoSection from "../../containers/VideoSection/VideoSection";
+import TeamSection from "../../containers/TeamSection/TeamSection";
 
 const Homepage = (props) => {
   const { screen } = useSelector((state) => state);
@@ -34,6 +35,7 @@ const Homepage = (props) => {
       <Banner />
       <Features />
       <VideoSection />
+      <TeamSection />
       <Footer />
     </div>
   );
