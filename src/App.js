@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
 import Editorpage from "./pages/Editorpage/Editorpage";
 import Profilepage from "./pages/Profilepage/Profilepage";
-import Docspage from "./pages/Docspage/Docspage";
+import NotAvailable from "./pages/NotAvailablepage/NotAvailablepage";
 import { setScreen } from "./features/screenSlice";
 import { useDispatch } from "react-redux";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
@@ -16,9 +16,9 @@ function App() {
   useEffect(() => {
     if (window.outerWidth < 1000) {
       screenDispatch(setScreen("Mobile"));
-    } else if (window.outerWidth < 1367) {
+    } else if (window.outerWidth < 1367 && window.outerWidth > 1000) {
       screenDispatch(setScreen("HD"));
-    } else {
+    } else if (window.outerWidth > 1367) {
       screenDispatch(setScreen("Full HD"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,9 +30,9 @@ function App() {
           <Route path="/" exact component={Homepage} />
           <Route path="/editor" exact component={Editorpage} />
           <Route path="/profile" exact component={Profilepage} />
-          <Route path="/docs" exact component={Docspage} />
           <Route path="/forget" exact component={ForgetPassword} />
           <Route path="/reset/:id/:token" exact component={ResetPassword} />
+          <Route path="/notAvailable" exact component={NotAvailable} />
         </Switch>
       </Router>
     </div>
