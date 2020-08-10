@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, Component} from "react";
 // import classes from "./Editorpage.module.css";
 // import { useDispatch } from "react-redux";
@@ -9,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "tui-image-editor/dist/tui-image-editor.css";
 import "./EditorPage.css";
 import ImageEditor from "@toast-ui/react-image-editor";
-import Button from "react-bootstrap/Button";
-import { withRouter } from 'react-router';
+import {Button,Modal} from "react-bootstrap";
+// import { withRouter } from 'react-router';
 import Axios from 'axios';
 import Loader from 'react-loader-spinner';
 
@@ -42,36 +41,6 @@ const myTheme = {
   'loadButton.backgroundColor': '#eb5f4b',
   'loadButton.color': '#414551',
   'loadButton.fontSize': '20px',
-=======
-import React, { useEffect, useState } from "react";
-import classes from "./Editorpage.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../../features/currentPageSlice";
-import EditorModal from "../../components/EditorModal/EditorModal";
-import Editor from "../../containers/Editor/Editor";
-
-const Editorpage = (props) => {
-  const { isLoggedIn } = useSelector((state) => state);
-  const dispatch = useDispatch(setCurrentPage);
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    dispatch(setCurrentPage("Editor"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      // history.push("/");
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
-  return <div className={classes.Editorpage}>{showModal ? <EditorModal /> : <Editor />}</div>;
->>>>>>> 76acbd0774a7b7f5badd971c6e74aa6d63fae7a0
 };
 
 class EditorPage extends Component {
@@ -87,16 +56,24 @@ class EditorPage extends Component {
   // );
   
   state={
-    imageSrc:'', 
+    imageSrc:'',
+    secImageSrc:'', 
     setImageSrc:"",
-    loading:false
+    loading:false,
+    showModal:false,
+    secondaryImage:false,
+    secondaryObj:null,
+    btnActivate:false
   }
-  
-  componentDidMount = () => {
-    console.log();
-  }
-
+  fileSrc = React.createRef();
   imageEditor = React.createRef();
+  componentDidMount(){
+    const fileInput = document.getElementsByClassName("tui-image-editor-load-btn")[1]
+    const that = this
+    fileInput.addEventListener('change',function() {
+        that.setState({btnActivate:true})
+    })
+  }
   saveImageToDisk = () => {
     const imageEditorInst = this.imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
@@ -110,12 +87,56 @@ class EditorPage extends Component {
    magicLoad =()=>{
     const imageEditorInst = this.imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
-    this.props.updateImage(data);
-    this.props.history.push('magic');
+    var data1='';
+    var width = imageEditorInst._graphics.canvasImage.width;
+    var height = imageEditorInst._graphics.canvasImage.height;   
+    var canvas = document.createElement('canvas');
+    var img = new Image();
+    var that = this
+    img.onload = function(){
+      var ctx = canvas.getContext('2d');
+      canvas.width = width;
+      canvas.height = height;
+      var props = imageEditorInst.getObjectProperties(that.state.secondaryObj.id, ['left', 'top', 'width', 'height']); 
+      var width1 = props.width;
+      var height1 = props.height;
+      var startX = props.left-(width1/2);
+      var startY= props.top-(height1/2);
+      ctx.fillStyle = "black";
+      ctx.drawImage(this,startX,startY,width1,height1);
+      ctx.globalCompositeOperation="source-in";
+      ctx.fillStyle="white";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.globalCompositeOperation="destination-atop";
+      ctx.fillStyle="black";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      data1 = canvas.toDataURL();
+      var canvas2 = document.createElement('canvas');
+      var ctx2 = canvas2.getContext('2d');
+      canvas2.width = width;
+      canvas2.height = height;
+      ctx2.drawImage(imageEditorInst._graphics.canvasImage._element, 0, 0,width,height);
+      
+      var data2 = canvas2.toDataURL();
+      // console.log(data);
+      // console.log(data1);
+      // console.log(data2)
+      const mimeType = data.split(";")[0];
+      const extension = data.split(";")[0].split("/")[1];
+      download(data, `image.${extension}`, mimeType);
+      const mimeType1 = data1.split(";")[0];
+      const extension1 = data1.split(";")[0].split("/")[1];
+      download(data1, `image.${extension1}`, mimeType1);
+      const mimeType2 = data2.split(";")[0];
+      const extension2 = data2.split(";")[0].split("/")[1];
+      download(data2, `image.${extension2}`, mimeType2);
+    }
+    img.src = this.state.secImageSrc;
+    // this.props.updateImage(data);
+    // this.props.history.push('magic');
    }
 
    dataURLtoFile = (dataurl, filename) => {
- 
     var arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]), 
@@ -125,9 +146,9 @@ class EditorPage extends Component {
     while(n--){
         u8arr[n] = bstr.charCodeAt(n);
     }
-    
+
     return new File([u8arr], filename, {type:mime});
-  }
+   }
 
   segmentPost= ()=>{
     const imageEditorInst = this.imageEditor.current.imageEditorInst;
@@ -154,18 +175,60 @@ class EditorPage extends Component {
     });
   }
 
+  launchModal = () => {
+    this.setState({showModal:true});
+  }
+  handleClose = () => {
+      this.setState({showModal:false})
+  }
+  uploadSecondImage=()=>{
+    var file = this.fileSrc.current.files[0];
+    var reader  = new FileReader();
+    const that = this;
+    reader.onloadend = function () {
+      that.setState({secImageSrc:reader.result})
+      const imageEditorInst = that.imageEditor.current.imageEditorInst;
+      imageEditorInst.addImageObject(reader.result).then(object => {
+        that.setState({secondaryImage:true})
+        that.setState({secondaryObj:object})
+      });
+    }
+    if (file) {
+      reader.readAsDataURL(file);
+    } 
+    else {
+      that.secondaryImage.current.src  = '';
+    }
+    this.handleClose();
+  }
+
   render(){
     return (
       <div>
         <Navbar />
+        <Modal show={this.state.showModal} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+          <Modal.Title>Choose your secodary Image</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><input type='file' ref={this.fileSrc}/></Modal.Body>
+          <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+              Close
+          </Button>
+          <Button variant="primary" onClick={this.uploadSecondImage} style={{backgroundColor:"#eb5f4b"}} className='button'>
+              Open Image
+          </Button>
+          </Modal.Footer>
+        </Modal>
         <div className="page">
         
         {this.state.loading===false?
-          <div className="center">
-            <Button className='button' onClick={this.saveImageToDisk}>Save Image to Disk</Button>
-            <Button style={{marginLeft:'50px'}} className='button' onClick={this.segmentPost}>Segment</Button>
-            <Button style={{marginLeft:'50px'}} className='button' onClick={this.colorizePost}>Colorization</Button>
-            <Button style={{marginLeft:'50px'}} className='button' onClick={this.magicLoad}>Harmonize</Button>
+          <div className="center"style={{minHeight:'50px'}}>
+            <Button style={{display:this.state.btnActivate===true?"inline-block":"none"}} className='button' onClick={this.saveImageToDisk}>Save Image to Disk</Button>
+            <Button style={{display:this.state.btnActivate===true?"inline-block":"none",marginLeft:'50px'}} className='button' onClick={this.segmentPost}>Segment</Button>
+            <Button style={{display:this.state.btnActivate===true?"inline-block":"none",marginLeft:'50px'}} className='button' onClick={this.colorizePost}>Colorization</Button>          
+            <Button type ='file' style={{display:this.state.btnActivate===true?"inline-block":"none",marginLeft:'50px'}} className='button' onClick={this.launchModal} >Upload Secondary Image</Button>
+            <Button style={{display:this.state.secondaryImage===true?"inline-block":"none",marginLeft:'50px'}} className='button' onClick={this.magicLoad}>Harmonize</Button>
           </div>
           :<div></div>
         }
@@ -211,4 +274,4 @@ class EditorPage extends Component {
 
 // export default Editorpage;
 
-export default withRouter(EditorPage);
+export default EditorPage;
