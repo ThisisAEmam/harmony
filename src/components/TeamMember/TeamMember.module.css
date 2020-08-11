@@ -1,7 +1,8 @@
 .TeamMemberContainer {
   width: 18%;
   height: fit-content;
-  z-index: 10;
+  position: relative;
+  z-index: 100;
   background-color: #fff;
 }
 

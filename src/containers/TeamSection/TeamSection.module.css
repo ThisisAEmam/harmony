@@ -20,6 +20,12 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+  z-index: 100;
+}
+
+.teamMember {
+  width: 18%;
+  z-index: 100;
 }
 
 .bannerCircle1 {
@@ -102,4 +108,30 @@
   100% {
     transform: rotate(0deg) scale(0.8);
   }
+}
+
+.text {
+  position: absolute;
+  left: 22%;
+  top: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.1rem;
+  width: calc(100% - 25%);
+  height: 100%;
+  text-align: justify;
+  z-index: 10;
+}
+
+.name {
+  color: var(--secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.body {
+  font-weight: 500;
+  font-size: 1.2rem;
 }
