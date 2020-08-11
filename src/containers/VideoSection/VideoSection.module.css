@@ -27,11 +27,14 @@
   position: relative;
   width: 50rem;
   height: calc(50rem * 9 / 16);
-  border: 2px dashed rgb(134, 167, 201);
+  /* border: 2px dashed rgb(134, 167, 201); */
+  border: 2px dashed var(--secondary);
+  border-radius: 10px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
 
 .video {
+  border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;

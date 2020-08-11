@@ -56,7 +56,7 @@ const TeamSection = (props) => {
 
   const textSpring = useSpring({
     opacity: showText ? 1 : 0,
-    transform: showText ? "translateX(0)" : "translateX(-2rem)",
+    transform: showText ? "translateX(0)" : "translateX(-3rem)",
     config: config.default,
   });
 
