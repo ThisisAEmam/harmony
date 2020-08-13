@@ -1,3 +1,139 @@
-.Editor {
+.page {
   margin-top: 5rem;
+  height: calc(100vh - 5rem);
+}
+
+.mainButton {
+  width: 14rem;
+  height: 2.5rem;
+  margin-right: 2rem;
+  color: #ddd;
+  background-color: #2b2d30;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: not-allowed;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.mainButton.active {
+  background-color: var(--secondary);
+  cursor: pointer;
+  color: #fff;
+}
+
+.mainButton:hover {
+  opacity: 0.9;
+}
+
+.mainButton:active,
+.mainButton:focus {
+  outline: none;
+}
+
+.mainButton:last-child {
+  margin-right: 0;
+}
+
+.buttons {
+  height: 5rem;
+  background-color: var(--text-light);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderContainer {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.loaderContainer.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-color: transparent;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer.showModal {
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  padding: 2rem;
+  background-color: #fff;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+}
+
+.modalTitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--secondary);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.modalBody {
+  margin: 2rem 0;
+}
+
+.modalBottom {
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modalBtnClose {
+  margin-right: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+
+.modalBtnClose:hover {
+  border-color: var(--text);
+}
+
+.modalBtnSubmitContainer {
+  border: 2px dashed var(--secondary);
+  border-radius: 5px;
+  transition: all 0.25s ease;
+}
+
+.modalBtnSubmitContainer:hover {
+  opacity: 0.9;
+}
+
+.modalBtnSubmit {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary);
+  color: #fff;
+  border-radius: 5px;
+  transform: translate(-0.2rem, -0.2rem);
+  cursor: pointer;
 }

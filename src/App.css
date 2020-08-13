@@ -20,6 +20,8 @@ code {
   --secondary: #eb5f4b;
   --tertiary: #f7c1b9;
   --text: #292c35;
+  --text-light: #222427;
+  /* --text-light: #383c41; */
 }
 
 ::-webkit-scrollbar {

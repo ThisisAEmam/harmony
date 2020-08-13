@@ -87,15 +87,18 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className={[classes.Navbar, isScrolled ? classes.scrolled : null, isLoggedIn ? classes.loggedIn : null].join(" ")}>
+    <div className={[classes.Navbar, isScrolled ? classes.scrolled : null, isLoggedIn ? classes.loggedIn : null, props.dark ? classes.dark : null].join(" ")}>
       <div className={classes.container}>
         <div className={classes.leftSide}>
           <div className={classes.logo}>
-            <img src="/images/logo.png" alt="Logo" onClick={logoHandler} />
+            <img src={props.dark ? "/images/logo-white.png" : "/images/logo.png"} alt="Logo" onClick={logoHandler} />
           </div>
           <ul>
             {navItemsArr.map((navItem, index) => (
-              <li key={index} className={activePage === index ? classes.active : null} onClick={() => navigationHandler(navItem)}>
+              <li
+                key={index}
+                className={[activePage === index ? classes.active : null, props.dark ? classes.white : null].join(" ")}
+                onClick={() => navigationHandler(navItem)}>
                 {navItem}
               </li>
             ))}
@@ -104,11 +107,18 @@ const Navbar = (props) => {
         {isLoggedIn ? (
           <div className={classes.rightSide}>
             <div
-              className={[classes.profile, activePage !== 0 ? classes.notHomeProfile : null, activePage === 3 ? classes.activeProfile : null].join(" ")}
+              className={[
+                classes.profile,
+                activePage !== 0 ? classes.notHomeProfile : null,
+                activePage === 3 ? classes.activeProfile : null,
+                props.dark ? classes.whiteMyProfile : null,
+              ].join(" ")}
               onClick={profileClickHandler}>
               <p>My profile</p>
             </div>
-            <div className={[classes.logout, activePage !== 0 ? classes.notHomeLogout : null].join(" ")} onClick={() => loginSignupClickHandler("logout")}>
+            <div
+              className={[classes.logout, activePage !== 0 ? classes.notHomeLogout : null, props.dark ? classes.whiteLogout : null].join(" ")}
+              onClick={() => loginSignupClickHandler("logout")}>
               <i className="fa fa-sign-out"></i>
               <p>Logout</p>
             </div>

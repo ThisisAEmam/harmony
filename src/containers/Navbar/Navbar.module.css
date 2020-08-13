@@ -8,6 +8,11 @@
   z-index: 1000;
 }
 
+.Navbar.dark {
+  background-color: var(--text-light);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
 .Navbar.scrolled {
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -45,7 +50,11 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease;
-  color: #555;
+  color: var(--text);
+}
+
+.Navbar .leftSide ul li.white {
+  color: #fff;
 }
 
 .Navbar .leftSide ul li:hover {
@@ -173,6 +182,10 @@
   color: var(--text);
 }
 
+.Navbar.loggedIn .rightSide .profile.notHomeProfile.whiteMyProfile p {
+  color: #fff;
+}
+
 .Navbar.loggedIn .rightSide .profile.activeProfile p {
   color: var(--secondary);
 }
@@ -209,6 +222,11 @@
 .Navbar.loggedIn .rightSide .logout.notHomeLogout i,
 .Navbar.loggedIn .rightSide .logout.notHomeLogout p {
   color: var(--text);
+}
+
+.Navbar.loggedIn .rightSide .logout.notHomeLogout.whiteLogout i,
+.Navbar.loggedIn .rightSide .logout.notHomeLogout.whiteLogout p {
+  color: #fff;
 }
 
 .Navbar.loggedIn.scrolled .logout i,

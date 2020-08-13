@@ -1,0 +1,5 @@
+.Editorpage {
+  background-color: var(--text);
+  overflow: hidden;
+  position: relative;
+}
