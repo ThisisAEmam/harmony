@@ -1,0 +1,27 @@
+.button {
+    margin-bottom: 10px;
+    background-color: #eb5f4b;
+}
+.button:hover {
+    margin-bottom: 10px;
+    background-color: #414551;
+    color:#eb5f4b;
+}
+.tui-image-editor-header-logo{
+    display:none;
+}
+.tui-image-editor-container .tui-image-editor-controls{
+    background-color: #2b2c31;
+}
+.tui-image-editor-container .tui-image-editor-header-buttons .tui-image-editor-download-btn{
+    display:none;
+}
+.tui-image-editor-load-btn:hover{
+    cursor:ponter;
+}
+.center {
+    text-align: center;
+}
+.page{
+    margin-top:100px;
+}
