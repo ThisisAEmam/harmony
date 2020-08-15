@@ -38,9 +38,39 @@
   padding-bottom: 1rem;
 }
 
+.socialMedia {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.socialMedia p {
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+.smlinks a {
+  margin: 0 0.35rem;
+}
+
+.smlinks a i {
+  font-size: 1.3rem;
+  color: black;
+  transition: all 0.25s ease;
+}
+
+.smlinks a:hover i {
+  opacity: 0.5;
+}
+
 .btnContainer {
   margin: 1.5rem auto;
-  margin-top: 1rem;
+  margin-top: 2rem;
   width: fit-content;
   border: 2px dashed var(--secondary);
   border-radius: 7px;

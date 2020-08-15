@@ -46,6 +46,17 @@ const TeamMember = (props) => {
         <img src={`images/members/${image}.jpg`} alt="member" />
         <p className={classes.name}>{props.name}</p>
         <p className={classes.position}>{props.position}</p>
+        <div className={classes.socialMedia}>
+          <p>Follow me on:</p>
+          <div className={classes.smlinks}>
+            <a href={props.linkedin} target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-linkedin"></i>
+            </a>
+            <a href={props.github} target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-github"></i>
+            </a>
+          </div>
+        </div>
         <div className={classes.btnContainer}>
           <div className={classes.btn} onClick={clickHandler}>
             {!active ? "Who am I?" : <i className="fa fa-chevron-left"></i>}

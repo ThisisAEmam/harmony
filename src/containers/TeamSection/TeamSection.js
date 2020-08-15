@@ -79,11 +79,18 @@ const TeamSection = (props) => {
         <animated.div className={classes.teamMember}>
           <TeamMember index={5} name="AbdelRahman Emam" position="Front-end Developer" />
         </animated.div> */}
-        <TeamMember index={1} name="Mohamed Amr" position="Machine Learning Engineer" />
-        <TeamMember index={2} name="Mahmoud Youssef" position="Machine Learning Engineer" upward />
-        <TeamMember index={3} name="Mohamed Abdullah" position="Back-end Developer" />
-        <TeamMember index={4} name="Ahmed Samir" position="Front-end Developer" upward />
-        <TeamMember index={5} name="AbdelRahman Emam" position="Front-end Developer" />
+        <TeamMember index={1} name="Mohamed Amr" position="Machine Learning Engineer" github={textData.first.github} linkedin={textData.first.linkedin} />
+        <TeamMember
+          index={2}
+          name="Mahmoud Youssef"
+          position="Machine Learning Engineer"
+          upward
+          github={textData.second.github}
+          linkedin={textData.second.linkedin}
+        />
+        <TeamMember index={3} name="Mohamed Abdullah" position="Back-end Developer" github={textData.third.github} linkedin={textData.third.linkedin} />
+        <TeamMember index={4} name="Ahmed Samir" position="Front-end Developer" upward github={textData.fourth.github} linkedin={textData.fourth.linkedin} />
+        <TeamMember index={5} name="AbdelRahman Emam" position="Front-end Developer" github={textData.fifth.github} linkedin={textData.fifth.linkedin} />
         <animated.div style={textSpring} className={classes.text}>
           <p className={classes.name}>{textName} says</p>
           <p className={classes.body}>"{textBody}"</p>

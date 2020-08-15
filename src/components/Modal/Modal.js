@@ -26,6 +26,7 @@ const Modal = (props) => {
   const [wrongConfirmPassword, setWrongConfirmPassword] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [loginError, setLoginError] = useState(false);
+  const [emailAlreadyInUse, setEmailAlreadyInUse] = useState(false);
 
   const history = useHistory();
 
@@ -136,6 +137,8 @@ const Modal = (props) => {
       }
 
       if (modal.type === "signup") {
+        setEmailAlreadyInUse(false);
+
         if (name === "") {
           setEmptyName(true);
         } else {
@@ -194,12 +197,15 @@ const Modal = (props) => {
         axios
           .post("/users", sentData)
           .then((res) => {
+            // console.log(res);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("isLoggedIn", true);
             loginDispatch(setLoggedIn(true));
             modalDispatch(setModal({ shown: false, type: "" }));
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            setEmailAlreadyInUse(true);
+          });
       }
     }
   };
@@ -233,7 +239,7 @@ const Modal = (props) => {
               <p className={classes.errorText}>No name is provided</p>
             </div>
           ) : null}
-          <div className={[classes.field, emptyEmail || wrongEmail ? classes.showText : null].join(" ")}>
+          <div className={[classes.field, emptyEmail || wrongEmail || emailAlreadyInUse ? classes.showText : null].join(" ")}>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -243,7 +249,9 @@ const Modal = (props) => {
               onChange={(text) => inputHandler("email", text)}
               onFocus={() => inputFocusHandler("email")}
             />
-            <p className={classes.errorText}>{emptyEmail ? "No email is provided." : "Please enter a valid email."}</p>
+            <p className={classes.errorText}>
+              {emptyEmail ? "No email is provided." : emailAlreadyInUse ? "Email is already used." : "Please enter a valid email."}
+            </p>
           </div>
           <div className={[classes.field, emptyPassword || wrongPassword || loginError ? classes.showText : null].join(" ")}>
             <label htmlFor="password">Password:</label>

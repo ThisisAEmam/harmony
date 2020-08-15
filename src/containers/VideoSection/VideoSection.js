@@ -11,9 +11,9 @@ const VideoSection = (props) => {
           className={classes.video}
           title="vimeo-player"
           src="https://player.vimeo.com/video/336812660"
-          frameborder="0"
+          frameBorder="0"
           allow="fullscreen"
-          allowfullscreen></iframe>
+          allowFullScreen></iframe>
       </div>
     </div>
   );
