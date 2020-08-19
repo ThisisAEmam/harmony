@@ -48,6 +48,12 @@ const Editor = (props) => {
   const [secondaryImage, setSecondaryImage] = useState(false);
   const [btnActivate, setBtnActivate] = useState(false);
   const [secondaryObj, setSecondaryObj] = useState(null);
+  const [vSign, setVSign] = useState(1);
+  const [hSign, setHSign] = useState(1);
+  const [secLeft, setSecLeft] = useState(0);
+  const [secTop, setSecTop] = useState(0);
+  const [secWidth, setSecWidth] = useState(0);
+  const [secHeight, setSecHeight] = useState(0);
 
   useEffect(() => {
     const fileInput = document.getElementsByClassName("tui-image-editor-load-btn")[1];
@@ -67,49 +73,39 @@ const Editor = (props) => {
     config: config.default,
   });
 
-  const saveImageToDisk = () => {
+  const preHarmonization = () => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
-    if (data) {
-      const mimeType = data.split(";")[0];
-      const extension = data.split(";")[0].split("/")[1];
-      download(data, `image.${extension}`, mimeType);
-    }
-  };
 
-  const magicLoad = () => {
-    const imageEditorInst = imageEditor.current.imageEditorInst;
-    const data = imageEditorInst.toDataURL();
-    let data1 = "";
     let width = imageEditorInst._graphics.canvasImage.width;
     let height = imageEditorInst._graphics.canvasImage.height;
     let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
+    canvas.width = width;
+    canvas.height = height;
+    let startX = secLeft - secWidth / 2;
+    let startY = secTop - secHeight / 2;
     let img = new Image();
-    img.onload = function () {
-      let ctx = canvas.getContext("2d");
-      canvas.width = width;
-      canvas.height = height;
-      let props = imageEditorInst.getObjectProperties(secondaryObj.id, ["left", "top", "width", "height"]);
-      let width1 = props.width;
-      let height1 = props.height;
-      let startX = props.left - width1 / 2;
-      let startY = props.top - height1 / 2;
+    console.log(img, startX, startY, secWidth, secHeight);
+    img.onload = () => {
       ctx.fillStyle = "black";
-      ctx.drawImage(img, startX, startY, width1, height1);
+
+      ctx.drawImage(img, startX, startY, secWidth, secHeight);
       ctx.globalCompositeOperation = "source-in";
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalCompositeOperation = "destination-atop";
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      data1 = canvas.toDataURL();
+      let data1 = canvas.toDataURL();
+
       let canvas2 = document.createElement("canvas");
       let ctx2 = canvas2.getContext("2d");
       canvas2.width = width;
       canvas2.height = height;
       ctx2.drawImage(imageEditorInst._graphics.canvasImage._element, 0, 0, width, height);
-
       let data2 = canvas2.toDataURL();
+      harmonizePost(data, data1, data2);
       const mimeType = data.split(";")[0];
       const extension = data.split(";")[0].split("/")[1];
       download(data, `image.${extension}`, mimeType);
@@ -121,6 +117,28 @@ const Editor = (props) => {
       download(data2, `image.${extension2}`, mimeType2);
     };
     img.src = secImageSrc;
+  };
+
+  const harmonizePost = (bgImg, maskImg, composedImg) => {
+    const imageEditorInst = imageEditor.current.imageEditorInst;
+    setLoading(true);
+    Axios.post("https://colorer.azurewebsites.net/color", { img: bgImg })
+      .then((response) => {
+        imageEditorInst.loadImageFromFile(dataURLtoFile(response.data.res, "lena")).then(() => {
+          setLoading(false);
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const saveImageToDisk = () => {
+    const imageEditorInst = imageEditor.current.imageEditorInst;
+    const data = imageEditorInst.toDataURL();
+    if (data) {
+      const mimeType = data.split(";")[0];
+      const extension = data.split(";")[0].split("/")[1];
+      download(data, `image.${extension}`, mimeType);
+    }
   };
 
   const dataURLtoFile = (dataurl, filename) => {
@@ -172,12 +190,37 @@ const Editor = (props) => {
   const uploadSecondImage = () => {
     let file = fileSrc.current.files[0];
     let reader = new FileReader();
-    reader.onloadend = function () {
+    reader.onloadend = () => {
       setSecImageSrc(reader.result);
       const imageEditorInst = imageEditor.current.imageEditorInst;
       imageEditorInst.addImageObject(reader.result).then((object) => {
         setSecondaryImage(true);
         setSecondaryObj(object);
+        setSecLeft(object.left);
+        setSecTop(object.top);
+        setSecWidth(object.width);
+        setSecHeight(object.height);
+      });
+      imageEditorInst.on("mousedown", (event, originPointer) => {
+        if (originPointer.x > secLeft) setHSign(1);
+        else setHSign(-1);
+        if (originPointer.y > secTop) setVSign(1);
+        else setVSign(-1);
+      });
+      imageEditorInst.on("objectScaled", (props) => {
+        setSecWidth(secWidth - (secLeft - props.left) * 2 * hSign);
+        setSecHeight(secHeight - (secTop - props.top) * 2 * vSign);
+        setSecLeft(props.left);
+        setSecTop(props.top);
+        // console.log(secWidth,secHeight);
+      });
+      imageEditorInst.on("objectMoved", (props) => {
+        // console.log(secondaryObj);
+        // TODO: make sure that the moving object is the right one the problem that state isnot lesining well
+        // if(props.id == secondaryObj.id){
+        setSecLeft(props.left);
+        setSecTop(props.top);
+        // }
       });
     };
     if (file) {
@@ -228,7 +271,7 @@ const Editor = (props) => {
             <div type="file" className={[classes.mainButton, btnActivate ? classes.active : null].join(" ")} onClick={btnActivate ? launchModal : null}>
               Upload Secondary Image
             </div>
-            <div className={[classes.mainButton, secondaryImage ? classes.active : null].join(" ")} onClick={secondaryImage ? magicLoad : null}>
+            <div className={[classes.mainButton, secondaryImage ? classes.active : null].join(" ")} onClick={secondaryImage ? preHarmonization : null}>
               Harmonize
             </div>
           </div>
