@@ -47,7 +47,7 @@ const Editor = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [secondaryImage, setSecondaryImage] = useState(false);
   const [btnActivate, setBtnActivate] = useState(false);
-  const [secondaryObj, setSecondaryObj] = useState(null);
+  // const [secondaryObj, setSecondaryObj] = useState(null);
   const [vSign, setVSign] = useState(1);
   const [hSign, setHSign] = useState(1);
   const [secLeft, setSecLeft] = useState(0);
@@ -75,7 +75,7 @@ const Editor = (props) => {
 
   const preHarmonization = () => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
-    const data = imageEditorInst.toDataURL();
+    const data = imageEditorInst.toDataURL("image/jpeg");
 
     let width = imageEditorInst._graphics.canvasImage.width;
     let height = imageEditorInst._graphics.canvasImage.height;
@@ -86,7 +86,6 @@ const Editor = (props) => {
     let startX = secLeft - secWidth / 2;
     let startY = secTop - secHeight / 2;
     let img = new Image();
-    // console.log(img, startX, startY, secWidth, secHeight);
     img.onload = () => {
       ctx.fillStyle = "black";
 
@@ -97,40 +96,38 @@ const Editor = (props) => {
       ctx.globalCompositeOperation = "destination-atop";
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      let data1 = canvas.toDataURL();
+      let data1 = canvas.toDataURL("image/jpeg");
 
       let canvas2 = document.createElement("canvas");
       let ctx2 = canvas2.getContext("2d");
       canvas2.width = width;
       canvas2.height = height;
       ctx2.drawImage(imageEditorInst._graphics.canvasImage._element, 0, 0, width, height);
-      let data2 = canvas2.toDataURL();
+      let data2 = canvas2.toDataURL("image/jpeg");
       harmonizePost(data, data1, data2);
-      const mimeType = data.split(";")[0];
-      const extension = data.split(";")[0].split("/")[1];
-      download(data, `image.${extension}`, mimeType);
-      const mimeType1 = data1.split(";")[0];
-      const extension1 = data1.split(";")[0].split("/")[1];
-      download(data1, `image.${extension1}`, mimeType1);
-      const mimeType2 = data2.split(";")[0];
-      const extension2 = data2.split(";")[0].split("/")[1];
-      download(data2, `image.${extension2}`, mimeType2);
+      // const mimeType = data.split(";")[0];
+      // const extension = data.split(";")[0].split("/")[1];
+      // download(data, `image.${extension}`, mimeType);
+      // const mimeType1 = data1.split(";")[0];
+      // const extension1 = data1.split(";")[0].split("/")[1];
+      // download(data1, `image.${extension1}`, mimeType1);
+      // const mimeType2 = data2.split(";")[0];
+      // const extension2 = data2.split(";")[0].split("/")[1];
+      // download(data2, `image.${extension2}`, mimeType2);
     };
     img.src = secImageSrc;
   };
 
-  const harmonizePost = (bgImg, maskImg, composedImg) => {
+  const harmonizePost = (composedImg, maskImg, bgImg) => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     setLoading(true);
     Axios.post("http://127.0.0.1:5000", { style: bgImg, mask: maskImg, content: composedImg })
       .then((response) => {
-        // imageEditorInst.loadImageFromFile(dataURLtoFile(response.data.res, "lena")).then(() => {
-        //   setLoading(false);
-        // });
-        console.log(response.data);
-        setLoading(false);
+        imageEditorInst.loadImageFromFile(dataURLtoFile(response.data.res, "lena")).then(() => {
+          setLoading(false);
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`there is an error \n ${err}`));
   };
 
   const saveImageToDisk = () => {
@@ -197,7 +194,6 @@ const Editor = (props) => {
       const imageEditorInst = imageEditor.current.imageEditorInst;
       imageEditorInst.addImageObject(reader.result).then((object) => {
         setSecondaryImage(true);
-        setSecondaryObj(object);
         setSecLeft(object.left);
         setSecTop(object.top);
         setSecWidth(object.width);
@@ -214,15 +210,10 @@ const Editor = (props) => {
         setSecHeight(secHeight - (secTop - props.top) * 2 * vSign);
         setSecLeft(props.left);
         setSecTop(props.top);
-        // console.log(secWidth,secHeight);
       });
       imageEditorInst.on("objectMoved", (props) => {
-        // console.log(secondaryObj);
-        // TODO: make sure that the moving object is the right one the problem that state isnot lesining well
-        // if(props.id == secondaryObj.id){
         setSecLeft(props.left);
         setSecTop(props.top);
-        // }
       });
     };
     if (file) {
