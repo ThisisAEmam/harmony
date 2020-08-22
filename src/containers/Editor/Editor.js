@@ -86,7 +86,7 @@ const Editor = (props) => {
     let startX = secLeft - secWidth / 2;
     let startY = secTop - secHeight / 2;
     let img = new Image();
-    console.log(img, startX, startY, secWidth, secHeight);
+    // console.log(img, startX, startY, secWidth, secHeight);
     img.onload = () => {
       ctx.fillStyle = "black";
 
@@ -122,11 +122,13 @@ const Editor = (props) => {
   const harmonizePost = (bgImg, maskImg, composedImg) => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     setLoading(true);
-    Axios.post("https://colorer.azurewebsites.net/color", { img: bgImg })
+    Axios.post("http://127.0.0.1:5000", { style: bgImg, mask: maskImg, content: composedImg })
       .then((response) => {
-        imageEditorInst.loadImageFromFile(dataURLtoFile(response.data.res, "lena")).then(() => {
-          setLoading(false);
-        });
+        // imageEditorInst.loadImageFromFile(dataURLtoFile(response.data.res, "lena")).then(() => {
+        //   setLoading(false);
+        // });
+        console.log(response.data);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
