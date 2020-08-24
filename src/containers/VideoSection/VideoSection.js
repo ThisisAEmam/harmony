@@ -10,7 +10,7 @@ const VideoSection = (props) => {
         <iframe
           className={classes.video}
           title="vimeo-player"
-          src="https://player.vimeo.com/video/336812660"
+          src="https://www.youtube.com/embed/_gwOD0Wueek"
           frameBorder="0"
           allow="fullscreen"
           allowFullScreen></iframe>
