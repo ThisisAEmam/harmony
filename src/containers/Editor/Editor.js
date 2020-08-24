@@ -54,6 +54,7 @@ const Editor = (props) => {
   const [secTop, setSecTop] = useState(0);
   const [secWidth, setSecWidth] = useState(0);
   const [secHeight, setSecHeight] = useState(0);
+  const [harmonizeModal, setHarmonizeModal] = useState(false);
 
   useEffect(() => {
     const fileInput = document.getElementsByClassName("tui-image-editor-load-btn")[1];
@@ -178,12 +179,20 @@ const Editor = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const launchModal = () => {
+  const launchModal = (type) => {
+    if (type === "harmonize") {
+      setHarmonizeModal(true);
+    } else {
+      setHarmonizeModal(false);
+    }
     setShowModal(true);
   };
 
   const handleClose = () => {
     setShowModal(false);
+    setTimeout(() => {
+      setHarmonizeModal(false);
+    }, 500);
   };
 
   const uploadSecondImage = () => {
@@ -236,17 +245,23 @@ const Editor = (props) => {
       <div className={classes.page}>
         <div ref={modalContainerRef} className={[classes.modalContainer, showModal ? classes.showModal : null].join(" ")} onClick={modalContainerHandler}>
           <animated.div style={modalSpring} className={classes.modal}>
-            <p className={classes.modalTitle}>Choose your secodary Image</p>
-            <input className={classes.modalBody} type="file" ref={fileSrc} />
+            <p className={classes.modalTitle}>{harmonizeModal ? "We are sorry" : "Choose your secodary Image"}</p>
+            {harmonizeModal ? (
+              <p className={classes.harmonizeNotAvailable}>Harmonize tool will be available very soon.</p>
+            ) : (
+              <input className={classes.modalBody} type="file" ref={fileSrc} />
+            )}
             <div className={classes.modalBottom}>
               <div onClick={handleClose} className={classes.modalBtnClose}>
                 Close
               </div>
-              <div className={classes.modalBtnSubmitContainer}>
-                <div onClick={uploadSecondImage} className={classes.modalBtnSubmit}>
-                  Open Image
+              {!harmonizeModal ? (
+                <div className={classes.modalBtnSubmitContainer}>
+                  <div onClick={uploadSecondImage} className={classes.modalBtnSubmit}>
+                    Open Image
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </animated.div>
         </div>
@@ -256,15 +271,20 @@ const Editor = (props) => {
               Save Image to Disk
             </div>
             <div className={[classes.mainButton, btnActivate ? classes.active : null].join(" ")} onClick={btnActivate ? segmentPost : null}>
-              Segment
+              Crop
             </div>
             <div className={[classes.mainButton, btnActivate ? classes.active : null].join(" ")} onClick={btnActivate ? colorizePost : null}>
-              Colorization
+              Colorize
             </div>
-            <div type="file" className={[classes.mainButton, btnActivate ? classes.active : null].join(" ")} onClick={btnActivate ? launchModal : null}>
+            <div
+              type="file"
+              className={[classes.mainButton, btnActivate ? classes.active : null].join(" ")}
+              onClick={btnActivate ? () => launchModal("sec") : null}>
               Upload Secondary Image
             </div>
-            <div className={[classes.mainButton, secondaryImage ? classes.active : null].join(" ")} onClick={secondaryImage ? preHarmonization : null}>
+            <div
+              className={[classes.mainButton, secondaryImage ? classes.active : null].join(" ")}
+              onClick={secondaryImage ? () => launchModal("harmonize") : null}>
               Harmonize
             </div>
           </div>
